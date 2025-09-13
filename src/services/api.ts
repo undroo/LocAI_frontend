@@ -32,6 +32,17 @@ export interface AskResponse {
   response: string
 }
 
+export interface VoiceRequest {
+  lesson_id: string
+  lesson_section_id: string
+  lessons_step: string
+}
+
+export interface VoiceResponse {
+  input: string
+  response: string
+}
+
 const API_BASE_URL = 'http://localhost:3001'
 
 export const api = {
@@ -94,6 +105,32 @@ export const api = {
       return askResponse
     } catch (error) {
       console.error('Failed to get AI response:', error)
+      throw error
+    }
+  },
+
+  async askVoice(request: VoiceRequest): Promise<VoiceResponse> {
+    try {
+      const response = await fetch(`${API_BASE_URL}/voice`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(request)
+      })
+      
+      if (!response.ok) {
+        if (response.status === 400) {
+          const errorData = await response.json()
+          throw new Error(errorData.message || 'Bad request')
+        }
+        throw new Error(`HTTP error! status: ${response.status}`)
+      }
+      
+      const voiceResponse = await response.json()
+      return voiceResponse
+    } catch (error) {
+      console.error('Failed to get voice response:', error)
       throw error
     }
   }

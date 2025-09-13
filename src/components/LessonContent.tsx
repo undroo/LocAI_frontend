@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import Carousel from './Carousel'
 import AIButton from './AIButton'
+import VoiceButton from './VoiceButton'
 import AIResponsePanel from './AIResponsePanel'
 import { api, LessonDetail, LessonSection } from '../services/api'
 import './LessonContent.css'
@@ -103,9 +104,16 @@ const LessonContent: React.FC = () => {
         <div className="section-content-wrapper">
           <h2 className="section-title">{section.title}</h2>
           {renderSectionContent(section)}
-          <div style={{ marginTop: 'auto' }}>
+          <div style={{ marginTop: 'auto', display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
             <AIButton 
               onSubmit={(prompt, response) => handleAIPromptSubmit(prompt, response, section.title)}
+              sectionTitle={section.title}
+              slideNum={index + 1}
+            />
+            <VoiceButton
+              onSubmit={(input, response) => handleAIPromptSubmit(input, response, section.title)}
+              lessonId={lessonId || ''}
+              sectionId={section.id}
               sectionTitle={section.title}
               slideNum={index + 1}
             />

@@ -15,6 +15,8 @@ const Header: React.FC = () => {
       </div>
       
       <nav className="header-nav">
+        <a href="/" className="nav-link">Home</a>
+
         <a href="lessons" className="nav-link">Lessons</a>
       </nav>
       

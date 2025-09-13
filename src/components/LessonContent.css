@@ -2,14 +2,17 @@
 .lesson-layout {
   display: flex;
   min-height: 100vh;
+  height: 90vh;
+  width: 100vw;
+  max-width: none;
   background: #ffffff;
 }
 
 .lesson-sidebar-left {
-  width: 350px;
+  width: 250px;
   background: #f8fafc;
   border-right: 1px solid #e2e8f0;
-  padding: 1.5rem 1rem;
+  padding: 1rem 0.5rem;
   overflow-y: auto;
 }
 
@@ -40,14 +43,14 @@
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 0.5rem;
 }
 
 .question-history-item {
   background: white;
   border: 1px solid #e2e8f0;
-  border-radius: 0.75rem;
-  padding: 1rem;
+  border-radius: 0.375rem;
+  padding: 0.5rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   transition: all 0.2s ease;
   cursor: pointer;
@@ -79,12 +82,12 @@
 }
 
 .question-history-section {
-  font-size: 0.75rem;
+  font-size: 0.625rem;
   font-weight: 600;
   color: #2563eb;
   background: #eff6ff;
-  padding: 0.25rem 0.5rem;
-  border-radius: 0.375rem;
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.25rem;
 }
 
 .question-history-time {
@@ -93,11 +96,12 @@
 }
 
 .question-history-text {
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   color: #374151;
-  line-height: 1.5;
+  line-height: 1.4;
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -121,14 +125,14 @@
 
 .lesson-content {
   flex: 1;
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 0 2rem;
+  padding: 2rem;
   background: #ffffff;
+  min-width: 0; /* Allows flex item to shrink below content size */
+  width: 100%;
 }
 
 .lesson-sidebar-right {
-  width: 450px;
+  width: 400px;
   background: #f8fafc;
   border-left: 1px solid #e2e8f0;
 }
@@ -147,6 +151,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  max-width: none;
 }
 
 .section-title {
@@ -161,6 +166,7 @@
   line-height: 1.7;
   color: #4b5563;
   margin-bottom: 1.5rem;
+  max-width: none;
 }
 
 .stages-list {
@@ -270,23 +276,33 @@
 }
 
 /* Responsive design */
-@media (max-width: 1400px) {
+@media (max-width: 1600px) {
   .lesson-sidebar-left {
-    width: 300px;
+    width: 240px;
   }
   
   .lesson-sidebar-right {
-    width: 400px;
+    width: 230px;
+  }
+}
+
+@media (max-width: 1400px) {
+  .lesson-sidebar-left {
+    width: 230px;
+  }
+  
+  .lesson-sidebar-right {
+    width: 220px;
   }
 }
 
 @media (max-width: 1200px) {
   .lesson-sidebar-left {
-    width: 280px;
+    width: 120px;
   }
   
   .lesson-sidebar-right {
-    width: 350px;
+    width: 200px;
   }
 }
 
@@ -304,7 +320,7 @@
   }
   
   .lesson-content {
-    padding: 0 1rem;
+    padding: 0 2rem;
     max-width: 100%;
   }
   
@@ -316,7 +332,7 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1440px) {
   .lesson-content {
     padding: 0 0.5rem;
   }

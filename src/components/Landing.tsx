@@ -12,7 +12,7 @@ const Landing: React.FC = () => {
   return (
     <div className="landing">
       <div className="landing-content">
-        <h1 className="landing-title">Welcome to LocAI</h1>
+        <h1 className="landing-title">Welcome to Teachi</h1>
         <p className="landing-subtitle">Your AI-powered learning companion</p>
         <p className="landing-description">
           Discover interactive lessons designed to enhance your learning experience with intelligent assistance.

@@ -21,6 +21,17 @@ export interface LessonDetail {
   sections: LessonSection[]
 }
 
+export interface AskRequest {
+  userPrompt: string
+  slide_topic?: string | null
+  slide_num?: number | null
+}
+
+export interface AskResponse {
+  input: string
+  response: string
+}
+
 const API_BASE_URL = 'http://localhost:3001'
 
 export const api = {
@@ -55,6 +66,36 @@ export const api = {
       return lessonDetail
     } catch (error) {
       console.error('Failed to fetch lesson detail:', error)
+      throw error
+    }
+  },
+
+  async askAI(request: AskRequest): Promise<AskResponse> {
+    try {
+      console.log('API: Making request to /text with:', request)
+      const response = await fetch(`${API_BASE_URL}/text`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(request)
+      })
+      
+      console.log('API: Response status:', response.status)
+      
+      if (!response.ok) {
+        if (response.status === 400) {
+          const errorData = await response.json()
+          throw new Error(errorData.message || 'Bad request')
+        }
+        throw new Error(`HTTP error! status: ${response.status}`)
+      }
+      
+      const askResponse = await response.json()
+      console.log('API: Response data:', askResponse)
+      return askResponse
+    } catch (error) {
+      console.error('Failed to get AI response:', error)
       throw error
     }
   }

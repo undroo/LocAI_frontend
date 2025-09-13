@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './Carousel.css'
 
 interface CarouselProps {
@@ -21,6 +21,23 @@ const Carousel: React.FC<CarouselProps> = ({ children, sectionTitles }) => {
     setCurrentSlide((prev) => (prev === children.length - 1 ? 0 : prev + 1))
   }
 
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'ArrowLeft') {
+        event.preventDefault()
+        goToPrevious()
+      } else if (event.key === 'ArrowRight') {
+        event.preventDefault()
+        goToNext()
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown)
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [])
+
   return (
     <div className="carousel">
       <div className="carousel-header">
@@ -31,14 +48,6 @@ const Carousel: React.FC<CarouselProps> = ({ children, sectionTitles }) => {
       </div>
 
       <div className="carousel-container">
-        <button 
-          className="carousel-nav carousel-nav-prev" 
-          onClick={goToPrevious}
-          aria-label="Previous section"
-        >
-          ‹
-        </button>
-
         <div className="carousel-content">
           <div 
             className="carousel-slides" 
@@ -51,15 +60,9 @@ const Carousel: React.FC<CarouselProps> = ({ children, sectionTitles }) => {
             ))}
           </div>
         </div>
-
-        <button 
-          className="carousel-nav carousel-nav-next" 
-          onClick={goToNext}
-          aria-label="Next section"
-        >
-          ›
-        </button>
       </div>
+
+      
 
       <div className="carousel-dots">
         {sectionTitles.map((title, index) => (
@@ -73,6 +76,7 @@ const Carousel: React.FC<CarouselProps> = ({ children, sectionTitles }) => {
           </button>
         ))}
       </div>
+
     </div>
   )
 }

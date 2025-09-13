@@ -9,7 +9,6 @@ interface AIButtonProps {
 }
 
 const AIButton: React.FC<AIButtonProps> = ({ onSubmit, sectionTitle, slideNum }) => {
-  console.log('AIButton rendering with props:', { sectionTitle, slideNum })
   const [isInputMode, setIsInputMode] = useState(false)
   const [inputValue, setInputValue] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -22,17 +21,14 @@ const AIButton: React.FC<AIButtonProps> = ({ onSubmit, sectionTitle, slideNum })
   }, [isInputMode])
 
   const handleButtonClick = () => {
-    console.log('AIButton clicked, switching to input mode')
     setIsInputMode(true)
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    console.log('AIButton handleSubmit called with:', { inputValue, isSubmitting })
     
     if (inputValue.trim() && !isSubmitting) {
       setIsSubmitting(true)
-      console.log('Making API request with:', { sectionTitle, slideNum })
       
       try {
         const request: AskRequest = {
@@ -41,10 +37,7 @@ const AIButton: React.FC<AIButtonProps> = ({ onSubmit, sectionTitle, slideNum })
           slide_num: slideNum
         }
         
-        console.log('Sending request:', request)
         const response = await api.askAI(request)
-        console.log('Received response:', response)
-        
         await onSubmit(response.input, response.response)
         setInputValue('')
         setIsInputMode(false)
@@ -105,11 +98,7 @@ const AIButton: React.FC<AIButtonProps> = ({ onSubmit, sectionTitle, slideNum })
   }
 
   return (
-    <button 
-      className="ai-button" 
-      onClick={handleButtonClick}
-      style={{ border: '2px solid red', padding: '10px' }}
-    >
+    <button className="ai-button" onClick={handleButtonClick}>
       <span className="ai-icon">✨</span>
       <span className="ai-text">Ask AI for more details</span>
     </button>

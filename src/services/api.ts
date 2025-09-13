@@ -44,6 +44,7 @@ export const api = {
       }
       
       const lessons = await response.json()
+      console.log('API: Lessons:', lessons)
       return lessons
     } catch (error) {
       console.error('Failed to fetch lessons:', error)
@@ -63,6 +64,7 @@ export const api = {
       }
       
       const lessonDetail = await response.json()
+      console.log('API: Lesson detail:', lessonDetail)
       return lessonDetail
     } catch (error) {
       console.error('Failed to fetch lesson detail:', error)
@@ -72,7 +74,6 @@ export const api = {
 
   async askAI(request: AskRequest): Promise<AskResponse> {
     try {
-      console.log('API: Making request to /text with:', request)
       const response = await fetch(`${API_BASE_URL}/text`, {
         method: 'POST',
         headers: {
@@ -80,8 +81,6 @@ export const api = {
         },
         body: JSON.stringify(request)
       })
-      
-      console.log('API: Response status:', response.status)
       
       if (!response.ok) {
         if (response.status === 400) {
@@ -92,7 +91,6 @@ export const api = {
       }
       
       const askResponse = await response.json()
-      console.log('API: Response data:', askResponse)
       return askResponse
     } catch (error) {
       console.error('Failed to get AI response:', error)

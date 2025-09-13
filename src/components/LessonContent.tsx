@@ -107,6 +107,8 @@ const LessonContent: React.FC = () => {
           <div style={{ marginTop: 'auto', display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
             <AIButton 
               onSubmit={(prompt, response) => handleAIPromptSubmit(prompt, response, section.title)}
+              lessonId={lessonId || ''}
+              sectionId={section.id}
               sectionTitle={section.title}
               slideNum={index + 1}
             />

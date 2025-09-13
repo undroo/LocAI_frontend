@@ -22,9 +22,10 @@ export interface LessonDetail {
 }
 
 export interface AskRequest {
+  lesson_id: string
+  lesson_section_id: string
+  lessons_step: string
   userPrompt: string
-  slide_topic?: string | null
-  slide_num?: number | null
 }
 
 export interface AskResponse {

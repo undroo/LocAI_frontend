@@ -20,12 +20,13 @@
 }
 
 .logo-icon {
-  font-size: 1.75rem;
-  color: #2563eb;
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
 }
 
 .logo-text {
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   font-weight: 700;
   color: #1e40af;
 }
@@ -39,7 +40,7 @@
   text-decoration: none;
   color: #374151;
   font-weight: 500;
-  font-size: 0.95rem;
+  font-size: 1.1rem;
   transition: color 0.2s;
 }
 

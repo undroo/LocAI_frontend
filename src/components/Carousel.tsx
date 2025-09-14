@@ -4,21 +4,27 @@ import './Carousel.css'
 interface CarouselProps {
   children: React.ReactNode[]
   sectionTitles: string[]
+  onSlideChange?: (index: number) => void
 }
 
-const Carousel: React.FC<CarouselProps> = ({ children, sectionTitles }) => {
+const Carousel: React.FC<CarouselProps> = ({ children, sectionTitles, onSlideChange }) => {
   const [currentSlide, setCurrentSlide] = useState(0)
 
   const goToSlide = (index: number) => {
     setCurrentSlide(index)
+    onSlideChange?.(index)
   }
 
   const goToPrevious = () => {
-    setCurrentSlide((prev) => (prev === 0 ? children.length - 1 : prev - 1))
+    const newIndex = currentSlide === 0 ? children.length - 1 : currentSlide - 1
+    setCurrentSlide(newIndex)
+    onSlideChange?.(newIndex)
   }
 
   const goToNext = () => {
-    setCurrentSlide((prev) => (prev === children.length - 1 ? 0 : prev + 1))
+    const newIndex = currentSlide === children.length - 1 ? 0 : currentSlide + 1
+    setCurrentSlide(newIndex)
+    onSlideChange?.(newIndex)
   }
 
   useEffect(() => {
@@ -41,7 +47,6 @@ const Carousel: React.FC<CarouselProps> = ({ children, sectionTitles }) => {
   return (
     <div className="carousel">
       <div className="carousel-header">
-        <h1 className="lesson-title">Lesson: The Water Cycle</h1>
         <div className="slide-counter">
           {currentSlide + 1} of {children.length}
         </div>

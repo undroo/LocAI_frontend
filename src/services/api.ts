@@ -44,6 +44,26 @@ export interface VoiceResponse {
   response: string
 }
 
+export interface MoveToLesson {
+  lesson_id: string
+}
+
+export type ShortcutAction = 'ask' | MoveToLesson
+
+export interface ShortcutResponse {
+  response: string
+  lesson_id: string
+  lesson_section_id: string
+  lessons_step: string
+  action: ShortcutAction
+}
+
+export interface ShortcutRequest {
+  lesson_id: string
+  lesson_section_id: string
+  lessons_step: string
+}
+
 const API_BASE_URL = 'http://localhost:3001'
 
 export const api = {
@@ -132,6 +152,32 @@ export const api = {
       return voiceResponse
     } catch (error) {
       console.error('Failed to get voice response:', error)
+      throw error
+    }
+  },
+
+  async triggerShortcut(request: VoiceRequest): Promise<ShortcutResponse> {
+    try {
+      const response = await fetch(`${API_BASE_URL}/shortcut`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(request)
+      })
+      
+      if (!response.ok) {
+        if (response.status === 400) {
+          const errorData = await response.json()
+          throw new Error(errorData.message || 'Bad request')
+        }
+        throw new Error(`HTTP error! status: ${response.status}`)
+      }
+      
+      const shortcutResponse = await response.json()
+      return shortcutResponse
+    } catch (error) {
+      console.error('Failed to trigger shortcut:', error)
       throw error
     }
   }

@@ -12,10 +12,13 @@ const Landing: React.FC = () => {
   return (
     <div className="landing">
       <div className="landing-content">
+        <div className="landing-logo">
+          <img src="/teachi-logo.png" alt="Teachi Logo" className="landing-logo-img" />
+        </div>
         <h1 className="landing-title">Welcome to Teachi</h1>
-        <p className="landing-subtitle">Your AI-powered learning companion</p>
+        <p className="landing-subtitle">Sidekick for Superhero teachers</p>
         <p className="landing-description">
-          Discover interactive lessons designed to enhance your learning experience with intelligent assistance.
+            Teachi is an offline AI learning hub for rural schools, easing teacher workloads and giving students reliable, curriculum-aligned resources without internet.
         </p>
         <button 
           className="landing-cta"

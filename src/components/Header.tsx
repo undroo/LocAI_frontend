@@ -7,10 +7,9 @@ const Header: React.FC = () => {
       <div className="header-left">
         <div className="logo">
           <a href="/" className="logo-link" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center' }}>
-            <div className="logo-icon">📚</div>
+            <img src="/teachi-logo.png" alt="Teachi Logo" className="logo-icon" />
             <span className="logo-text">Teachi</span>
           </a>
-          
         </div>
       </div>
       

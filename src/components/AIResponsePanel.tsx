@@ -39,8 +39,8 @@ const AIResponsePanel: React.FC<AIResponsePanelProps> = ({
     <div className="ai-response-panel">
       <div className="ai-panel-header">
         <h3 className="ai-panel-title">
-          <span className="ai-panel-icon">🤖</span>
-          Teachi AI
+          <span className="ai-panel-icon"></span>
+          Sidekick
         </h3>
         {selectedConversation && (
           <span className="ai-panel-section">{selectedConversation.sectionTitle}</span>

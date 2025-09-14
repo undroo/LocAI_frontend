@@ -21,7 +21,7 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  font-size: 1.125rem;
+  font-size: 1.25rem;
   font-weight: 600;
   color: #1f2937;
   margin: 0;
@@ -32,7 +32,7 @@
 }
 
 .ai-panel-count {
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   color: #6b7280;
   background: #f3f4f6;
   padding: 0.25rem 0.5rem;
@@ -40,7 +40,7 @@
 }
 
 .ai-panel-section {
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   color: #2563eb;
   background: #eff6ff;
   padding: 0.25rem 0.5rem;
@@ -71,7 +71,7 @@
 }
 
 .ai-panel-empty-text {
-  font-size: 0.875rem;
+  font-size: 1rem;
   line-height: 1.5;
   max-width: 280px;
 }
@@ -100,7 +100,7 @@
 }
 
 .ai-response-section {
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   font-weight: 600;
   color: #2563eb;
   background: #eff6ff;
@@ -109,12 +109,12 @@
 }
 
 .ai-response-time {
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   color: #6b7280;
 }
 
 .ai-response-prompt {
-  font-size: 0.875rem;
+  font-size: 1rem;
   color: #374151;
   margin-bottom: 0.75rem;
   line-height: 1.5;
@@ -126,7 +126,7 @@
 }
 
 .ai-response-answer {
-  font-size: 0.875rem;
+  font-size: 1rem;
   color: #4b5563;
   line-height: 1.6;
   background: #f9fafb;
@@ -149,7 +149,7 @@
   border: 1px solid #e2e8f0;
   border-radius: 0.75rem;
   color: #6b7280;
-  font-size: 0.875rem;
+  font-size: 1rem;
 }
 
 .ai-loading-dots {

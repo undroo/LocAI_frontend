@@ -22,6 +22,7 @@ const LessonContent: React.FC = () => {
   }>>([])
   const [isGenerating, setIsGenerating] = useState(false)
   const [selectedConversationId, setSelectedConversationId] = useState<string | null>(null)
+  const [currentSectionIndex, setCurrentSectionIndex] = useState(0) // Used by Carousel onSlideChange
 
   useEffect(() => {
     const fetchLessonData = async () => {
@@ -41,6 +42,29 @@ const LessonContent: React.FC = () => {
 
     fetchLessonData()
   }, [lessonId])
+
+  // Listen for global shortcut events
+  useEffect(() => {
+    const handleShortcutTriggered = (event: CustomEvent) => {
+      const shortcutResponse = event.detail
+      const newResponse = {
+        id: shortcutResponse.id,
+        prompt: shortcutResponse.prompt,
+        response: shortcutResponse.response,
+        sectionTitle: shortcutResponse.sectionTitle,
+        timestamp: new Date(shortcutResponse.timestamp)
+      }
+      
+      setAiResponses(prev => [...prev, newResponse])
+      setSelectedConversationId(newResponse.id)
+    }
+
+    window.addEventListener('shortcutTriggered', handleShortcutTriggered as EventListener)
+    
+    return () => {
+      window.removeEventListener('shortcutTriggered', handleShortcutTriggered as EventListener)
+    }
+  }, [])
 
   const handleAIPromptSubmit = async (prompt: string, response: string, sectionTitle: string) => {
     console.log(`AI prompt submitted for section "${sectionTitle}":`, prompt)
@@ -70,6 +94,7 @@ const LessonContent: React.FC = () => {
   const handleConversationSelect = (conversationId: string) => {
     setSelectedConversationId(conversationId)
   }
+
 
 
   const handleBackClick = () => {
@@ -339,7 +364,11 @@ const LessonContent: React.FC = () => {
         <button className="back-button" onClick={handleBackClick}>
           ← Back to Lessons
         </button>
-        <Carousel sectionTitles={sectionTitles}>
+        <h1 className="lesson-title">{lessonData.title}</h1>
+        <Carousel 
+          sectionTitles={sectionTitles}
+          onSlideChange={setCurrentSectionIndex}
+        >
           {renderSlides()}
         </Carousel>
       </div>
